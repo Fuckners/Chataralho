@@ -1,0 +1,87 @@
+@font-face {
+    font-family: Kawaifodase;
+    src: url('../fonts/Pacifico-Regular.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    display: flex;
+    background-color: #ff83ac;
+    background-image: url('../img/4706201.jpg');
+    background-position: center center;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    min-width: 350px;
+}
+
+form {
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    max-width: 90%;
+    min-width: 350px;
+    height: 40%;
+    border-radius: 20px;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+label {
+    font-family: monospace;
+    color: #8F50FF;
+    font-size: 1.5rem;
+    align-self: flex-start;
+    margin-left: 15px;
+}
+
+input {
+    border: none;
+    border-radius: 10px;
+    background-color: aliceblue;
+    overflow-y: auto;
+    padding: 5px 10px;
+    height: 1.5rem;
+    width: 95%;
+}
+
+:not(input).error {
+    color: red;
+}
+
+input.error {
+    border: 1px solid red;
+    box-shadow: 1px 1px 2px red;
+}
+
+[type=submit] {
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1.5rem;
+    background-color: #ff83ac;
+    color: white;
+    cursor: pointer;
+}
+
+[type=submit]:active {
+    box-shadow: 1px 1px 3px 0 #c76586;
+}
+
+.container {
+    width: 100%;
+}
+
+.title {
+    font-family: 'Kawaifodase';
+    text-align: center;
+    color: #8F50FF;
+}

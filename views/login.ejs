@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Página de Login</title>
+</head>
+<body>
+    <form id="form" action="/authenticate" method="post">
+
+        <div class="container">
+            <label for="email">Email</label>
+            <input class="<%= erros.email[0] ? 'error' : '' %>" type="text" name="email" id="email" value="<%= dados.email %>" required>
+        </div>
+
+        <div class="container">
+            <label for="password">Senha</label>
+            <input class="<%= erros.password[0] ? 'error' : '' %>" type="password" name="password" id="password" value="<%= dados.password %>" required>
+        </div>
+        
+        <small class="error"><%= erros.email + erros.password + erros.internal %></small>
+            <button type="submit">Logar</button>
+    </form>
+</body>
+
+<script src="/js/login.js"></script>
+
+</html>

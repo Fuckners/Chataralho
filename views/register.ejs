@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Página de Registro</title>
+</head>
+<body>
+    <form action="/save/user" method="post">
+
+        <div class="container">
+            <label for="username">Username</label>
+            <input class="<%= erros.username[0] ? 'error' : '' %>" type="text" name="username" id="username" maxlength="50" value="<%= dados.username %>" required>
+        </div>
+
+        <div class="container">
+            <label for="email">Email</label>
+            <input class="<%= erros.email[0] ? 'error' : '' %>" type="email" name="email" id="email" maxlength="100" value="<%= dados.email %>" required>
+        </div>
+
+        <div class="container">
+            <label for="password">Senha</label>
+            <input class="<%= erros.password[0] ? 'error' : '' %>" type="password" name="password" maxlength="50" id="password" value="<%= dados.password %>" required>
+        </div>
+        <small class="error"><%= erros.username + erros.email + erros.password + erros.internal %></small>
+        <button type="submit">Registrar</button>
+    </form>
+</body>
+<script src="/js/register.js"></script>
+</html>

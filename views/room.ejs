@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <link rel="stylesheet" href="/css/contatos.css">
+    <title>Chat do Fuckner</title>
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <main>
+        <div class="config">
+            <div>
+                <button class="room-config-btn" aria-label="configurar sala">
+                    <img src="/img/config.png" alt="configurações">
+                </button>
+            </div>
+        </div>
+        
+        <div id="cabecalho">
+            <h1 class="title">Chataralho</h1>
+            <div class="header">
+            <a href="/" class="back" aria-label="voltar para página de contatos"></a>
+
+            <div id="infos">
+                <!-- room info -->
+                <input id="room_name" type="hidden" value="<%= room.name %>" readonly>
+                <input id="room_id" type="hidden" value="<%= room.id %>" readonly>
+                <input id="number_of_messages" type="hidden" value="<%= messages.length %>">
+                <!-- user info -->
+                <input id="username" type="hidden" value="<%= user.username %>" readonly>
+                <input id="user_id" type="hidden" value="<%= user.id %>" readonly>
+            </div>
+
+            <span class="username"><%= room.name.slice(0, 20) %></span>
+            <a href="/logout">
+                <img class="logout" src="/img/logout.png" alt="logout">
+            </a>
+        </div>
+        </div>
+        <div id="mensagens">
+            <% for(message of messages) { %>
+
+                <% let date = message.date %>
+                <% let showDate = `${date.getHours()}:${date.getMinutes()}:${date.getSeconds()} | ${date.getDate() < 10 ? '0' : ''}${date.getDate()}/${date.getMonth() + 1 < 10 ? '0' : ''}${date.getMonth() + 1}/${date.getFullYear()}` %>
+
+                <div class="<%= message.sender_id === user.id ? 'myMsg' : '' %> msgShow" id="<%= message.id %>" data-date="<%= showDate %>" data-author="<%= message.sender_id %>">
+                    <p class="author"><%= message.sender_name %></p>
+                    <p><%= message.data %></p>
+                </div>
+            <% } %>
+        </div>
+        <div id="search">
+            <!-- <input type="file"> -->
+            <textarea id="msg" maxlength="255" cols="20" rows="1" aria-label="texto da mensagem" placeholder="Digite sua mensagem!"></textarea>
+            <button id="enviar" type="submit">></button>
+        </div>
+    </main>
+    <!-- MODAL PARA abrir configurações da sala -->
+    <div class="modal-add-room hidden">
+        <form action="/edit/room" method="post" id="configRoom" class="addRoom">
+            <input type="text" name="name" placeholder="Nome da sala" maxlength="50" aria-label="nome da sala" value="<%= room.name %>" required>
+            <input type="text" name="description" placeholder="Descrição da sala" maxlength="200" aria-label="descrição da sala" value="<%= room.description %>" required>
+            <input type="hidden" name="room" value="<%= room.id %>">
+        
+            <div id="emails">
+                <% for (part of room.participants) { %>
+                    <div data-id="<%= part.id %>" class="participant">
+                        <p><%= part.name %></p>
+                        <small><%= part.email %></small>
+                        <button type="button" class="kick">❌</button>
+                    </div>
+                <% } %>
+            </div>
+
+            <button type="button" id="addMail" class="addMail" aria-label="adicionar participante">+</button>
+            <button type="submit">Confirmar</button>
+        </form>
+    </div>
+</body>
+<script src="/js/room.js"></script>
+</html>

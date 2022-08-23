@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/contatos.css">
+    <title>Salas</title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <main>
+        <div class="theme">
+            <div>
+                
+                <button class="choose-theme-btn" aria-label="Escolher tema">
+                    <img src="/img/theme_white.png" alt="temas">
+                </button>
+                
+                <!-- MODAL PARA MUDAR O TEMA -->
+                <div class="modal-choose-theme hidden">
+                    <button class="light-pink theme" data-theme="light-pink" aria-label="rosa claro"></button>
+                    <button class="dark-purple theme" data-theme="dark-purple" aria-label="roxo escuro"></button>
+                    <button class="gray-purple theme" data-theme="gray-purple" aria-label="cinza e roxo"></button>
+                </div>
+
+            </div>
+        </div>
+        
+        <h1 class="title">Salas</h1>
+        <div class="header">
+            <span class="username"><%= user.username %></span>
+            <a href="/logout">
+                <img class="logout" src="/img/logout.png" alt="logout">
+            </a>
+        </div>
+        <hr>
+        <div id="search">
+            <input type="search" id="query">
+            <button type="submit">></button>
+        </div>
+        <div class="rooms">
+            <% for (room of rooms) { %>
+                <a href="/room/<%= room.id %>" data-name="<%= room.name %>" class="room">
+                    <h2><%= room.name %></h2>
+                    <span class="desc"><%= room.desc.length > 35 ? room.desc.slice(0, 35) + '...' : room.desc %></span>
+                </a>
+            <% } %>
+        </div>
+        <button class="add-btn-room" aria-label="Adicionar Contato">+</button>
+    </main>
+
+    <!-- MODAL PARA ADICIONAR SALA -->
+        <div class="modal-add-room hidden">
+            <form action="/save/room" method="post" id="addRoom" class="addRoom">
+                <input type="text" name="name" id="name" placeholder="Nome da sala" maxlength="50" aria-label="nome da sala" required>
+                <input type="text" name="desc" id="desc" placeholder="Descrição da sala" maxlength="200" aria-label="descrição da sala" required>
+            
+                <div id="emails">
+                    <input type="email" name="participants" pattern="^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$" placeholder="Email do usuário" required>
+                </div>
+                <button type="button" id="addMail" class="addMail" aria-label="adicionar participante">+</button>
+                <button type="submit">Criar</button>
+            </form>
+        </div>
+</body>
+<script src="/js/index.js"></script>
+</html>

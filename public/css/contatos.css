@@ -1,0 +1,515 @@
+@font-face {
+    font-family: Kawaifodase;
+    src: url('../fonts/Pacifico-Regular.ttf');
+}
+
+/*
+:root {
+
+     JEITO PARA FAZER COM JAVASCRIPT, PORÉM, DESISTI
+     Tema rosa - Claro
+        style.setProperty('--cor0', '#ff4e89');
+        style.setProperty('--cor1', '#ff83ac');
+        style.setProperty('--cor2', '#fff7fa');
+        style.setProperty('--cor3', '#ffffff');
+        style.setProperty('--cor4', '#ff4e89');
+        style.setProperty('--cor5', '#ffffff');
+
+     Tema roxo - Escuro
+        style.setProperty('--cor0', '#F7F3FF');
+        style.setProperty('--cor1', '#391b5a');
+        style.setProperty('--cor2', '#241437');
+        style.setProperty('--cor3', '#F7F3FF');
+        style.setProperty('--cor4', '#F7F3FF');
+        style.setProperty('--cor5', '#391b5a');
+
+     Tema cinza com roxo - Escuro
+        style.setProperty('--cor0', '#F7F3FF');
+        style.setProperty('--cor1', '#2C1842');
+        style.setProperty('--cor2', '#4B514F');
+        style.setProperty('--cor3', '#F7F3FF');
+        style.setProperty('--cor4', '#F7F3FF');
+        style.setProperty('--cor5', '#2C1842');
+
+}
+*/
+
+/* CSS GLOBAIS */
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+}
+
+/* temas */
+body[data-theme="light-pink"] {
+    --cor0: #ff4e89; /* titulo rooms */
+    --cor1: #ff83ac; /* principal */
+    --cor2: #fff7fa; /* fundo main */
+    --cor3: #ffffff; /* fontes */
+    --cor4: #ff4e89; /* cor username */
+    --cor5: #ffffff; /* cor cada sala */
+    --cor6: #000000;
+}
+
+body[data-theme="dark-purple"] {
+    --cor0: #F7F3FF; /* titulo rooms */
+    --cor1: #391b5a; /* principal */
+    --cor2: #241437; /* fundo main */
+    --cor3: #F7F3FF; /* fontes */
+    --cor4: #F7F3FF; /* cor username */
+    --cor5: #391b5a; /* cor cada sala */
+    --cor6: #ffffff;
+}
+
+body[data-theme="gray-purple"] {
+    --cor0: #F7F3FF; /* titulo rooms */
+    --cor1: #2C1842; /* principal */
+    --cor2: #4B514F; /* fundo main */
+    --cor3: #F7F3FF; /* fontes */
+    --cor4: #F7F3FF; /* cor username */
+    --cor5: #2C1842; /* cor cada sala */
+    --cor6: #ffffff;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: var(--cor1);
+    background-image: url('../img/4706201.jpg');
+    background-position: center center;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    min-width: 350px;
+}
+
+main {
+    display: flex;
+    position: relative;
+    background-color: var(--cor2);
+    padding: 10px;
+    max-width: 90%;
+    min-width: 350px;
+    height: 90%;
+    border-radius: 20px;
+    flex-direction: column;
+}
+
+hr {
+    border: 1px dashed var(--cor4);
+    box-shadow: 0 0 3px 1px var(--cor4);
+    width: 90%;
+    margin: 10px auto;
+}
+
+#search {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 98%;
+    padding: 5px;
+}
+
+#search > input, #search > textarea {
+    all: unset;
+    background-color: white;
+    font-family: monospace;
+    border: 1px solid var(--cor1);
+    border-radius: 20px;
+    padding: 0 0 0 10px;
+    margin: 0 1% 0 0;
+    flex-grow: 1;
+}
+
+#search > textarea {
+    resize: vertical;
+    min-height: 2rem;
+    max-height: 10rem;
+}
+
+#search > input:focus-visible, #search > textarea:focus-visible {
+    box-shadow: 0 0 10px 0 var(--cor1);
+}
+
+#search > textarea::-webkit-scrollbar, #mensagens::-webkit-scrollbar {
+    width: 5px;
+}
+
+#search > textarea::-webkit-scrollbar-track, #mensagens::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+#search > textarea::-webkit-scrollbar-thumb, #mensagens::-webkit-scrollbar-thumb {
+    background-color: var(--cor1);
+    border-radius: 20px;
+}
+
+#search > button {
+    all: unset;
+    display: flex;
+    cursor: pointer;
+    text-align: center;
+    color: var(--cor3);
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--cor1);
+    border: 1px solid var(--cor1);
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    /* display: none !important; */
+    left: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.title {
+    font-family: 'Kawaifodase';
+    text-align: center;
+    color: var(--cor3);
+    font-size: 3rem;
+    background-color: var(--cor1);
+    margin: -10px -10px 0 -10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.back {
+    all: unset;
+    width: 1rem;
+    height: 1rem;
+    border: 3px solid var(--cor0);
+    border-right: none;
+    border-bottom: none;
+    border-radius: 5px;
+    transform: rotate(-45deg);
+    cursor: pointer;
+}
+
+.back > a {
+    z-index: 1;
+}
+
+.title::before, .title::after {
+    content: ' - ';
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.username {
+    color: var(--cor4);
+    text-align: left;
+    font-size: 2rem;
+    font-family: monospace;
+}
+
+.logout {
+    padding: 3px;
+    width: 2.3rem;
+}
+
+/* modal temas */
+
+.modal-choose-theme {
+    /* transition: <property> <duration> <timing-function> <delay>; */
+    transition: left .5s linear, opacity .3s linear, visibility .5s linear;
+    display: flex;
+    width: 150px;
+    height: 50px;
+    border-radius: 25px;
+    position: absolute;
+    background-color: #f7f3ff;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    top: 0;
+    left: 110%;
+}
+
+.choose-theme-btn, .room-config-btn {
+    background-color: transparent;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.choose-theme-btn img {
+    filter: drop-shadow(0 0 3px #ffffffb9);
+    width: 3.7rem;
+}
+
+.room-config-btn img {
+    filter: drop-shadow(0 0 3px #ffffffb9);
+    width: 2.5rem;
+}
+
+div.theme, div.config {
+    position: absolute;
+}
+
+div.config {
+    top: 1.5rem;
+    left: 1.5rem;
+}
+
+div.theme > div, div.config > div {
+    position: relative;
+}
+
+button.theme {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1px solid transparent;
+    border-radius: 50%;
+}
+
+.light-pink {
+    background-color: #ff4e89;
+}
+
+.dark-purple {
+    background-color: #8F50FF;
+}
+
+.gray-purple {
+    background-color: #7c7883;
+}
+
+
+/* CONTATOS */
+
+.rooms {
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+}
+
+.room {
+    all: unset;
+    cursor: pointer;
+    background-color: var(--cor5);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1.2rem;
+    color: var(--cor0);
+}
+
+.rooms::-webkit-scrollbar {
+    width: 5px;
+}
+
+.rooms::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 20px;
+}
+
+.rooms::-webkit-scrollbar-thumb {
+    background-color: var(--cor0);
+    border-radius: 20px;
+}
+
+.room + .room {
+    margin-top: 10px;
+}
+
+.desc {
+    opacity: .7;
+    color: var(--cor0);
+}
+
+/* .online, .offline {
+    margin: 0 0 0 5px;
+}
+
+.online {
+    color: #b0df69;
+}
+
+.offline {
+    color: red;
+} */
+
+/* modal create room */
+.add-btn-room {
+    position: absolute;
+    display: flex;
+    bottom: 5px;
+    right: 5px;
+    width: 3rem;
+    height: 3rem;
+    border: 1px solid var(--cor0);
+    border-radius: 50%;
+    background-color: var(--cor1);
+    color: white;
+    font-weight: bolder;
+    font-size: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.modal-add-room {
+    position: absolute;
+    display: flex;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: #0000006d;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.addRoom {
+    display: flex;
+    min-width: 350px;
+    border-radius: 15px;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#emails {
+    display: flex;
+    max-height: 200px;
+    overflow-y: auto;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+#emails::-webkit-scrollbar {
+    width: 5px;
+    cursor: grab;
+}
+
+#emails::-webkit-scrollbar-track {
+    background-color: var(--cor2);
+}
+
+#emails::-webkit-scrollbar-thumb {
+    background-color: var(--cor1);
+    border-radius: 20px;
+}
+
+.addRoom input, .participant {
+    border: 1px solid transparent;
+    padding: 10px;
+    background-color: var(--cor2);
+    color: var(--cor6);
+}
+
+.participant p {
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+.participant small {
+    font-size: .9rem;
+}
+
+.participant button {
+    visibility: hidden;
+    background-color: transparent;
+    font-size: 1.3rem;
+}
+
+.addRoom > input:first-child {
+    border-radius: 10px 10px 0 0;
+}
+
+.addRoom input:invalid {
+    color: #f55e5e;
+}
+
+.addRoom input:focus-visible {
+    border: 1px solid var(--cor2);
+    outline: none;
+}
+
+.addRoom input::placeholder {
+    color: var(--cor0);
+    opacity: .5;
+}
+
+.addRoom button {
+    cursor: pointer;
+    color: var(--cor3);
+    border: none;
+    padding: 5px 0;
+}
+
+.addRoom button.addMail {
+    cursor: copy;
+    background-color: var(--cor1);
+}
+
+.addRoom button[type=submit] {
+    background-color: #0be60b;
+    border-radius: 0 0 10px 10px;
+}
+
+.addRoom button:active {
+    box-shadow: inset 0 0 5px 0 #0000005f;
+}
+
+/* ROOM */
+
+#mensagens {
+    overflow-y: auto;
+    display: flex;
+    height: max-content;
+    flex-direction: column;
+    width: 100%;
+    font-family: monospace;
+    flex-grow: 1;
+}
+
+.msgShow {
+    position: relative;
+    background-color: #cff7ff;
+    width: 80%;
+    border-radius: 15px;
+    align-self: flex-start;
+    padding: 2px 8px;
+    margin: 3px;
+}
+
+.msgShow:hover::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: block;
+    padding: .2rem .5rem;
+    background-color: #7c7883;
+    border-radius: 10px 0 15px 0;
+    color: white;
+    font-size: .7rem;
+    content: attr(data-date);
+}
+
+.myMsg {
+    align-self: flex-end;
+    background-color: #ced1fa;
+}
+
+.author {
+    color: #8F50FF;
+    font-size: 1rem;
+}
+
+.myMsg .author {
+    color: #d10074;
+}
+
+.error {
+    border: 2px solid red !important;
+}
