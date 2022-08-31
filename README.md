@@ -445,10 +445,11 @@ $ node server.js
 
 <span id="contact"> </span>
 ### Autor
-<a href="https://blog.rocketseat.com.br/author/thiago/">
- <img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/100722316?s=400&u=a71fc45baf666450aafd21e99aa729e48b1f1552&v=4" width="100px;"/>
+<a href="https://github.com/Fuckners/Fuckners">
+ <img src="https://avatars.githubusercontent.com/u/100722316?s=400&u=a71fc45baf666450aafd21e99aa729e48b1f1552&v=4" width="100px;"/>
  <br>
- <sub><b>Felipe Fuckner Clariano</b></sub></a>
+ <sub><b>Felipe Fuckner Clariano</b></sub>
+</a>
  
  Entre em contato! 💌
  
