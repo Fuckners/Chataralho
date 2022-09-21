@@ -441,7 +441,7 @@ $ node server.js
 
 # Converse com seus amigos até enjoar!
 ```
-***Observação:** Caso você queira que outras *na mesma rede* pessoas também consigam acessar o site e trocar mensagens, será necessário alterar todos os códigos js (chataralho > public > js). Mude todas as ocorrencias de `localhost:6847` ou `http://localhost:6847` para o ip do computador que está rodando o servidor. Exemplo: `123.456.78.910:6847` ou `http://123.456.78.910:6847`*
+***Observação:** Caso você queira que outras pessoas **na mesma rede** também consigam acessar o site e trocar mensagens, será necessário alterar todos os códigos js (chataralho > public > js). Mude todas as ocorrencias de `localhost:6847` ou `http://localhost:6847` para o ip do computador que está rodando o servidor. Exemplo: `123.456.78.910:6847` ou `http://123.456.78.910:6847`*
 
 <span id="contact"> </span>
 ### Autor
